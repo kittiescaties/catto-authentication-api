@@ -224,7 +224,7 @@ app.get("/api/v2/users/info" , (req, res) => {
 
 
 
-app.listen("80", function () {
+app.listen("8080", function () {
     console.log("Authentication Started On Port:", `80`);
 });
 
