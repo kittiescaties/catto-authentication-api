@@ -5,16 +5,20 @@ const app = express();
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('config.json'));
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
+const hook = new Webhook(config.settings.webhook);
 
-
+  
 
 
 const requestCounts = {};
-
+app.use(express.static('html'))
 // used to block ipaddress that exceeded the max request limit
 app.use((req, res, next) => {
   const ip = req.ip;
-  
+  const embed4 = new MessageBuilder() 
+  .setTitle('IP Blocked Due to Spam!')
+  .setAuthor(`IP: ${ip}`)
+  .setColor('#00b0f4')
   // adds 1 each request
   requestCounts[ip] = (requestCounts[ip] || 0) + 1;
   
@@ -25,7 +29,11 @@ app.use((req, res, next) => {
       delete requestCounts[ip];
     }, config.protection.seconds_blocked * 1000);
     
-    return res.status(403).json({ error: true, message: 'Too many requests. Your IP has been blocked.' });
+    res.status(403).json({ error: true, message: 'Too many requests. Your IP has been blocked.' });
+    hook.send(embed4)
+    .catch(err => {
+        console.error('[ERROR] Webhook invalid:', err);
+      });
   }
   
   next();
@@ -36,11 +44,9 @@ app.use((req, res, next) => {
 
 
 
-app.get("/" , (req, res) => {
-
-res.status(200).json({"Catto Authentication API Version": "v2"})
-
-});
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
 
 
 
@@ -49,7 +55,7 @@ app.get("/api/v2/authenticate", (req, res) => {
 
    const key = req.query.key;
    const keyData2 = require("./keys.json")
-   const hook = new Webhook(config.settings.webhook);
+
    if (config.logs.log_ip == "false") IP = "LOGGING DISABLED"
    const embed = new MessageBuilder() 
    .setTitle('User Logged in!')
@@ -61,18 +67,19 @@ app.get("/api/v2/authenticate", (req, res) => {
 
 
    const embed2 = new MessageBuilder()
-   .setTitle('User Failed Logged in!')
+   .setTitle('User Failed Logged in! | IP: ${IP} ')
    .setAuthor(`Key: ${key}`)
    .setColor('#00b0f4')
     
 
    // checks if key is valid
-   if (!key)  res.status(401).json({"error": true, "message": "Invalid User."});
+   if (!key)  return res.status(401).json({"error": true, "message": "Invalid User."});
    if (!keyData2[key] ) return res.status(401).json({"error": true, "message": "Invalid User."});
    
    if (!keyData2[key] && config.logs.failed_login == "true") {
     res.status(401).json({"error": true, "message": "Invalid key."}); 
     hook.send(embed2);
+    
    }
 
    if (keyData2[key].banned == "true") return res.status(401).json({"error": true, "message": "User Banned."});
@@ -110,9 +117,9 @@ app.get("/api/v2/users/info" , (req, res) => {
    const admin_keys = JSON.parse(fs.readFileSync('admin.json'));
    //if (!admin) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
    //if (!name) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
-   if (!admin_keys[admin]) res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
+   if (!admin_keys[admin]) return res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
 
-  if (!keyData[name]) res.status(401).json({"error": true, "message": "Invalid User!"});
+  if (!keyData[name]) return res.status(401).json({"error": true, "message": "Invalid User!"});
 
 
   if ("expiry" in keyData[name]) {
@@ -141,7 +148,7 @@ app.get("/api/v2/users/info" , (req, res) => {
         const admin_keys = JSON.parse(fs.readFileSync('admin.json'));
         //if (!admin) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
         //if (!name) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
-        if (!admin_keys[admin]) res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
+        if (!admin_keys[admin])  return res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
      
      
      
@@ -167,8 +174,8 @@ app.get("/api/v2/users/info" , (req, res) => {
             const admin_keys = JSON.parse(fs.readFileSync('admin.json'));
             //if (!admin) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
             //if (!name) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
-            if (!admin_keys[admin]) res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
-            if (!keyData[name]) res.status(401).json({"error": true, "message": "Invalid User"});
+            if (!admin_keys[admin]) return res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
+            if (!keyData[name]) return res.status(401).json({"error": true, "message": "Invalid User"});
          
          
             const banned = "true";
@@ -188,8 +195,8 @@ app.get("/api/v2/users/info" , (req, res) => {
             const admin_keys = JSON.parse(fs.readFileSync('admin.json'));
             //if (!admin) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
             //if (!name) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
-            if (!admin_keys[admin]) res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
-            if (!keyData[name]) res.status(401).json({"error": true, "message": "Invalid User"});
+            if (!admin_keys[admin]) return res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
+            if (!keyData[name]) return res.status(401).json({"error": true, "message": "Invalid User"});
          
          
             const banned = "false";
@@ -210,14 +217,16 @@ app.get("/api/v2/users/info" , (req, res) => {
                 const admin_keys = JSON.parse(fs.readFileSync('admin.json'));
                 //if (!admin) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
                 //if (!name) res.status(401).json({"error": true, "message": "Key Query is Empty!"});
-                if (!admin_keys[admin]) res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
-                if (!keyData[name]) res.status(401).json({"error": true, "message": "Invalid User"});
+                if (!admin_keys[admin]) return res.status(401).json({"error": true, "message": "Admin Access Is Denied!"});
+                if (!keyData[name]) return res.status(401).json({"error": true, "message": "Invalid User"});
+
+
              
              
                 delete keyData[name];
                 fs.writeFile("keys.json", JSON.stringify(keyData, null, 4), (err) => {});
                //res.status(200).json({"error": false, "message": "Valid User!", "discord": keyData[name].discord, "expired": expired });
-               res.status(200).json({"error": false, "message": `user ${name} removed`});    
+               return res.status(200).json({"error": false, "message": `user ${name} removed`});    
                  });
     
 
@@ -228,7 +237,14 @@ app.listen("80", function () {
     console.log("Authentication Started On Port:", `80`);
 });
 
-
+process.on('uncaughtException', (err) => {
+    console.log('\x1b[31m%s\x1b[0m','[error]', err);
+  });
+  
+  process.on('unhandledRejection', (reason) => {
+    console.log('\x1b[31m%s\x1b[0m','[error]', 'Unhandled Rejection:', reason.message);
+  });
+  
 
 
 

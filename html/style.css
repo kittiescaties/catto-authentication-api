@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@900&display=swap');
+
+
+
+
+
+
+body{
+ margin: 0%;
+}
+
+h1{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    color:#fcfdff   !important;
+    font-size:350%;
+    text-align: center;
+    margin-top: 10%;
+    overflow-wrap: normal;
+}
+.subheading{
+  
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  color:#fcfdff  !important;
+  font-size: 175%;
+  text-align: center;
+  margin-bottom: 5%;
+  overflow-wrap: normal;
+}
+p{
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  margin-right: 1%;
+  margin-top: 1.31%;
+  top:0;
+  z-index:1;
+  padding:0;
+  font-family: 'Noto Serif Display', serif;
+  color:hsl(0, 0%, 19%)  !important;
+  overflow-wrap: normal;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  text-decoration: underline;
+  color: inherit;
+}
+
+
+
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+  text-align: center;
+}
+
+.column .button{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #40403e;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+      opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+.column:hover .button {
+  opacity: 1;
+}
+ 
+.link {
+  font-size: 80%;
+  position: absolute;
+  right: 1;
+  margin-top: 1.31%;
+  margin-left: 1%;
+  top:0;
+  z-index:1;
+  padding:0;
+  font-family: 'Noto Serif Display', serif;
+  color:hsl(0, 0%, 19%)  !important;
+}
+body{
+    background-color: #1c1c1b;
+    
+}
+
+
+
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-instagram {
+  background: #ff5700;
+  color: white;
+}
+
+
+
+
+
+button {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #40403e;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+  }
+  button:hover{
+    background: #858585
+     transform: scale(1.1);
+  padding: 14px 60px;
+  cursor: pointer;
+    box-shadow: 0 10px 25px rgba(185, 184, 184, 0.3);
+  }
+  .logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+/* The navigation bar */
+.navbar {
+  overflow: hidden;
+  margin: 0px;
+   z-index:1;
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+p {
+  text-align:center
+ }
+
+.center {
+  text-align: center
+ }
+  
+  /* Scrollbar styles */
+  footer {
+    padding: 10px 20px;
+    background: rgb(41, 41, 41);
+    color: rgb(48, 47, 47);
+    float: center;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .footer b {
+    float: left;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+
+
+
+/* Change background on mouse-over */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+  background: #333;
+  /*border-radius: 10px;*/
+  }
+  
+  ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #ccc;  
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+  background: #999;  
+  }
+
+/* Main content */
+.main {
+  margin-top: 30px; /* Add a top margin to avoid content overlay */
+}
+
+
+
+
+  img {
+    
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 10px solid rgb(255, 0, 0);
+    padding:  10px; 
+     margin-top: 5%;
+     margin-bottom: 10%;
+     width:  300px;
+     height: 300px;
+     object-fit: cover;
+     box-shadow: 0 5px 7px rgba(0,0,0,0.15);
+     transition: box-shadow 0.3s ease-in-out;
+     transition: transform .2s; /* Animation */
+  }
+  img:hover{
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(185, 184, 184, 0.3);
+  }
+  .showcase {
+    width : 90%;
+    height: 90%;
+  }
+
+.container {
+  display: flex;
+}
+
+.sellix-box {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.sellix-box .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e86c1;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 20px;
+}
+
+.sellix-box .logo {
+  margin-right: 10px;
+}
+
+.sellix-box .logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.sellix-box .content {
+  padding: 20px;
+}
+
+.sellix-box .image img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.sellix-box .description {
+  margin-bottom: 20px;
+}
+
+.sellix-box .details p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sellix-box button {
+  background-color: #2e86c1;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sellix-box button:hover {
+  background-color: #4d94ff;
+}
+
+
+
+/* Track */
+ 
+/* Handle */
