@@ -12,7 +12,6 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 
 app.set("view engine", "js");
 app.set("trust proxy", 1);
-//const webhookClient = new WebhookClient({ url: 'https://discord.com/api/webhooks/id/token' });
 
 app.get("/api/authenticate", (req, res) => {
  async function LocalTunnel_establisher(){
@@ -24,7 +23,7 @@ app.get("/api/authenticate", (req, res) => {
     const key = req.query.key;
     const hwid = req.query.hwid;
     const keyData = require("./keys.json")
-    const hook = new Webhook("https://discord.com/api/webhooks/xxxxxxxxxxx/xxxxxxxxxxxx");
+    const hook = new Webhook(config.webhook;
  
     const embed = new MessageBuilder()
     .setTitle('User Logged in!')
@@ -58,39 +57,11 @@ app.get("/api/authenticate", (req, res) => {
     if(!hwid) return res.send({"error": true, "message": "hwid invalid."});    
     if(!keyData[key].hwid) return res.send({"error": true, "message": "key invalid"});
     
-    //if(!config[vers]) return res.send({"error": true, "message": "Outdated"});
     
     hook.send(embed);
     return res.status(401).json({error: false, message: "Key Valid"}) ;
     
 });
-
-
-app.get("/api/tiktok", (req, res) => {
-    let key = req.query.key;
-    let channel = req.query.channel;
-    
-    if (!key == "kitty") res.send({"error": true, "message": "Invalid Key"});   
-    if(!key) res.send({"error": true, "message": "No Input"});  
-    
-    
-    //exec("screen timeout 120 python3 view.py latinosquadz")
-    execSync(`screen timeout 30 python3 /root/x.py ${channel}`, (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});
-    res.send({"error": false, "message": "Sent."});   
-    //console.log(exec)
-});
-
- 
 app.listen("80", function () {
     console.log("Webserver Started On Port:", `80`);
 });
