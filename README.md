@@ -20,6 +20,6 @@ I will add a discord bot to do the same features to the api
 user api: 
 - user info http://127.0.0.1/api/v2/users/info?key=adminkey&user=userkey
 - list users http://127.0.0.1/api/v2/users/list?key=adminkey
-- ban user http://127.0.0.1/api/v2/ban?key=adminkey&user=userkey
-- unban user http://127.0.0.1/api/v2/unban?key=adminkey&user=userkey
-- remove user http://127.0.0.1/api/v2/remove?key=adminkey&user=userkey
+- ban user http://127.0.0.1/api/v2/users/ban?key=adminkey&user=userkey
+- unban user http://127.0.0.1/api/v2/users/unban?key=adminkey&user=userkey
+- remove user http://127.0.0.1/api/v2/users/remove?key=adminkey&user=userkey
