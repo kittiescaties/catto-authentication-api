@@ -1,0 +1,14 @@
+{
+   "settings": {
+      "webhook": "https://discord.com/api/webhooks/1079234610791190598/uSKo2qHafRoCkyUPongJBPTx-6_C5t5BfDRV37393PQA8vHPX1PEUdBUnXpKyofokNV8"
+   },
+   "logs": {
+      "success_login": "true",
+      "failed_login": "true",
+      "log_ip": "true"
+   },
+   "protection": {
+      "max_tries": "10",
+      "seconds_blocked": 120
+   }
+}
